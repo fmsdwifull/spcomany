@@ -1,5 +1,14 @@
 /*CoreUtil*/
 /*工具类，类似java静态工具类*/
+/*
+参数说明
+url:要请求的接口地址
+params:传递给后端的数据
+func：请求响应成功回掉方法(function)
+method:请求的方式例如 GET/POST/PUT/DELETED 等
+async：是否是异步请求；async的默认方式是true,即异步方式；async设置为false时,为同步方式
+contentType：类型编码；默认为：application/json; charset=UTF-8
+* */
 var CoreUtil = (function () {
     var coreUtil = {};
     /*ajax请求*/
@@ -127,12 +136,3 @@ var CoreUtil = (function () {
     return coreUtil;
 })(CoreUtil, window);
 
-/*
-参数说明
-url:要请求的接口地址
-params:传递给后端的数据
-func：请求响应成功回掉方法(function)
-method:请求的方式例如 GET/POST/PUT/DELETED 等
-async：是否是异步请求；async的默认方式是true,即异步方式；async设置为false时,为同步方式
-contentType：类型编码；默认为：application/json; charset=UTF-8
-* */

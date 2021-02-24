@@ -61,7 +61,7 @@ public class HomeServiceImpl implements HomeService {
                 "]";*/
         // 1、用户角色表 根据用户id 获取角色id  2、角色权限表 根据角色id 获取权限id  3、权限表 根据权限id 获取权限信息。
         List<PermissionRespNodeVO> permissionTreeList = permissionService.getPermissionTreeList(userId);
-
+        System.out.println("----------------+"+permissionTreeList);
 //        List<PermissionRespNodeVO> permissionTreeList = JSON.parseArray(home, PermissionRespNodeVO.class);
         // 设置菜单数据
         homeRespVO.setMenus(permissionTreeList);

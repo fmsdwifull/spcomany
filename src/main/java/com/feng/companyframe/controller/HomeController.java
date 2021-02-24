@@ -41,7 +41,8 @@ public class HomeController {
         HomeRespVO home = homeService.getHome(userId);
         DataResult result = DataResult.success();
         result.setData(home);
-        System.out.print("-----------result----------:"+result);
+        //System.out.print("-----------home----------:"+home);
+        //System.out.print("-----------result----------:"+result);
         return  result;
     }
 

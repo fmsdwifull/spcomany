@@ -134,15 +134,20 @@ public class PermissionServiceImpl implements PermissionService {
     private List<PermissionRespNodeVO> getChildToExchangeBtn(String id, List<SysPermission> all) {
         List<PermissionRespNodeVO> list = new ArrayList<>();
         for (SysPermission sysPermission : all) {
+            System.out.println("-------------------0------------------"+id);
+            //找父级，没有父级怎么办？
             if ((id).equals(sysPermission.getPid()) && sysPermission.getType() != 3) {
                 PermissionRespNodeVO permissionRespNodeVO = new PermissionRespNodeVO();
                 BeanUtils.copyProperties(sysPermission, permissionRespNodeVO);
+
                 permissionRespNodeVO.setTitle(sysPermission.getName());
+                System.out.println("-------------------1------------------"+permissionRespNodeVO);
                 // 开始递归
                 permissionRespNodeVO.setChildren(getChildToExchangeBtn(sysPermission.getId(), all));
                 list.add(permissionRespNodeVO);
             }
         }
+        System.out.println("------------------3-----------------"+list);
         return list;
     }
 

@@ -27,6 +27,7 @@ import java.lang.String;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -34,6 +35,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 
 /**
@@ -82,6 +84,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public LoginRespVO login(LoginReqVO loginReqVO) {
+        org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
         // 从数据库获取的 真实 用户信息
         SysUser userInfoByName = sysUserMapper.getUserInfoByName(loginReqVO.getUsername());
         // 判断对应出现的异常，让全局异常类 进行捕捉
@@ -110,6 +113,8 @@ public class UserServiceImpl implements UserService {
         claims.put(Constant.JWT_ROLES_KEY, getRolesByUserId(userInfoByName.getId()));
         // 放入用户对应角色的权限， 假数据，按说是从数据库查询，已改为从数据库中 获取权限集合
         claims.put(Constant.JWT_PERMISSIONS_KEY, getPermissionsByUserId(userInfoByName.getId()));
+        System.out.println("==================="+getPermissionsByUserId(userInfoByName.getId()));
+
         // 生成 accessToken
         String accessToken = JwtTokenUtil.getAccessToken(userInfoByName.getId(), claims);
         String refreshToken;
